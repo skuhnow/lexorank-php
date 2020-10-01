@@ -1,1 +1,0 @@
-C:37:"PHPUnit\Runner\DefaultTestResultCache":272:{a:2:{s:7:"defects";a:2:{s:42:"SKlocke\LexoRank\Tests\BucketTest::testFoo";i:5;s:44:"SKlocke\LexoRank\Tests\LexoRankTest::testMin";i:4;}s:5:"times";a:2:{s:42:"SKlocke\LexoRank\Tests\BucketTest::testFoo";d:0.001;s:44:"SKlocke\LexoRank\Tests\LexoRankTest::testMin";d:0.004;}}}
