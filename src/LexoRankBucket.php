@@ -1,6 +1,6 @@
 <?php
 
-namespace SKlocke\LexoRank\LexoRank;
+namespace SKlocke\LexoRank;
 
 use Exception;
 
@@ -62,7 +62,7 @@ class LexoRankBucket
         $val = LexoInteger::parse($str, LexoRank::NUMERAL_SYSTEM());
         $var2 = LexoRankBucket::VALUES();
         $var3 = count($var2);
-        for ($var4 = 0; $var4 < $var3; ++$var4) {
+        for ($var4 = 0; $var4 < $var3; $var4++) {
             $bucket = $var2[$var4];
             if ($bucket->value->equals($val)) {
                 return $bucket;
@@ -76,7 +76,7 @@ class LexoRankBucket
     {
         $var1 = LexoRankBucket::VALUES();
         $var2 = count($var1);
-        for ($var3 = 0; $var3 < $var2; ++$var3) {
+        for ($var3 = 0; $var3 < $var2; $var3++) {
             $bucket = $var1[$var3];
             if ($bucket->equals(LexoRankBucket::from($bucketId))) {
                 return $bucket;

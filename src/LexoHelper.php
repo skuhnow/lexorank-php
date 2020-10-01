@@ -1,6 +1,6 @@
 <?php
 
-namespace SKlocke\LexoRank\LexoRank;
+namespace SKlocke\LexoRank;
 
 class LexoHelper
 {
@@ -11,7 +11,7 @@ class LexoHelper
         $finalLength = $sourceIndex + $length;
         for ($i = $sourceIndex; $i < $finalLength; $i++) {
             $destinationArray[$destination] = $sourceArray[$i];
-            ++$destination;
+            $destination++;
         }
     }
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace SKlocke\LexoRank\LexoRank;
+namespace SKlocke\LexoRank;
 
 use Exception;
 use SKlocke\LexoRank\NumeralSystems\ILexoNumeralSystem;
@@ -25,9 +25,9 @@ class LexoInteger
         $man = [];
         $strIndex = strlen($str) - 1;
 
-        for ($magIndex = 0; $strIndex >= 0; ++$magIndex) {
-            $man[$magIndex] = $system->toDigit($str{$strIndex});
-            --$strIndex;
+        for ($magIndex = 0; $strIndex >= 0; $magIndex++) {
+            $man[$magIndex] = $system->toDigit($str[$strIndex]);
+            $strIndex--;
         }
 
         return LexoInteger::make($system, $sign, $man);
@@ -76,12 +76,12 @@ class LexoInteger
         $estimatedSize = max(count($l), count($r));
         $result = array_fill(0, $estimatedSize, 0);
         $carry = 0;
-        for ($i = 0; $i < $estimatedSize; ++$i) {
+        for ($i = 0; $i < $estimatedSize; $i++) {
             $lnum = $i < count($l) ? $l[$i] : 0;
             $rnum = $i < count($r) ? $r[$i] : 0;
             $sum = $lnum + $rnum + $carry;
             for ($carry = 0; $sum >= $sys->getBase(); $sum -= $sys->getBase()) {
-                ++$carry;
+                $carry++;
             }
 
             $result[$i] = $sum;
@@ -115,15 +115,15 @@ class LexoInteger
     private static function multiplyInternal(ILexoNumeralSystem $sys, array $l, array $r): array
     {
         $result = array_fill(0, count($l) + count($r), 0);
-        for ($li = 0; $li < count($l); ++$li) {
-            for ($ri = 0; $ri < count($r); ++$ri) {
+        for ($li = 0; $li < count($l); $li++) {
+            for ($ri = 0; $ri < count($r); $ri++) {
                 $resultIndex = $li + $ri;
                 for (
                   $result[$resultIndex] += $l[$li] * $r[$ri];
                   $result[$resultIndex] >= $sys->getBase();
                   $result[$resultIndex] -= $sys->getBase()
                 ) {
-                  ++$result[$resultIndex + 1];
+                  $result[$resultIndex + 1]++;
                 }
             }
         }
@@ -139,7 +139,7 @@ class LexoInteger
 
         $nmag = array_fill(0, $digits, $sys->getBase() - 1);
 
-        for ($i = 0; $i < count($mag); ++$i) {
+        for ($i = 0; $i < count($mag); $i++) {
             $nmag[$i] = $sys->getBase() - 1 - $mag[$i];
         }
 
@@ -378,7 +378,7 @@ class LexoInteger
         $var2 = $this->mag;
         $var3 = count($var2);
 
-        for ($var4 = 0; $var4 < $var3; ++$var4) {
+        for ($var4 = 0; $var4 < $var3; $var4++) {
             $digit = $var2[$var4];
             $sb->insert(0, $this->sys->toChar($digit));
         }

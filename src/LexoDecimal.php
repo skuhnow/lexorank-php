@@ -1,6 +1,6 @@
 <?php
 
-namespace SKlocke\LexoRank\LexoRank;
+namespace SKlocke\LexoRank;
 
 use Exception;
 use SKlocke\LexoRank\NumeralSystems\ILexoNumeralSystem;
@@ -24,7 +24,7 @@ class LexoDecimal
             throw new Exception('More than one ' . $system->getRadixPointChar());
         }
 
-        if ($partialIndex < 0) {
+        if ($partialIndex === false) {
             return LexoDecimal::make(LexoInteger::parse($str, $system), 0);
         }
 
@@ -45,7 +45,7 @@ class LexoDecimal
 
         $zeroCount = 0;
         for ($i = 1; $i < $sig && $integer->getMag($i) === 0; $i++) {
-            ++$zeroCount;
+            $zeroCount++;
         }
 
         $newInteger = $integer->shiftRight($zeroCount);
@@ -74,13 +74,13 @@ class LexoDecimal
         $tsig = $this->sig;
         $omag = $other->mag;
 
-        for ($osig = $other->sig; $tsig < $osig; ++$tsig) {
+        for ($osig = $other->sig; $tsig < $osig; $tsig++) {
             $tmag = $tmag->shiftLeft();
         }
 
         while ($tsig > $osig) {
             $omag = $omag->shiftLeft();
-            ++$osig;
+            $osig++;
         }
 
         return LexoDecimal::make($tmag->add($omag), $tsig);
@@ -92,13 +92,13 @@ class LexoDecimal
         $thisSig = $this->sig;
         $otherMag = $other->mag;
 
-        for ($otherSig = $other->sig; $thisSig < $otherSig; ++$thisSig) {
+        for ($otherSig = $other->sig; $thisSig < $otherSig; $thisSig++) {
             $thisMag = $thisMag->shiftLeft();
         }
 
         while ($thisSig > $otherSig) {
             $otherMag = $otherMag->shiftLeft();
-            ++$otherSig;
+            $otherSig++;
         }
 
         return LexoDecimal::make($thisMag->subtract($otherMag), $thisSig);
@@ -130,7 +130,7 @@ class LexoDecimal
             return true;
         }
 
-        for ($i = 0; $i < $this->sig; ++$i) {
+        for ($i = 0; $i < $this->sig; $i++) {
             if ($this->mag->getMag($i) !== 0) {
                 return false;
             }

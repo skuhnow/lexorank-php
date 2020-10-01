@@ -1,6 +1,6 @@
 <?php
 
-namespace SKlocke\LexoRank\LexoRank;
+namespace SKlocke\LexoRank;
 
 
 use Exception;
@@ -256,21 +256,22 @@ class LexoRank
         $val = new StringBuilder($formatVal);
         $partialIndex = strpos($formatVal, LexoRank::NUMERAL_SYSTEM()->getRadixPointChar());
         $zero = LexoRank::NUMERAL_SYSTEM()->toChar(0);
-        if ($partialIndex < 0) {
+        if ($partialIndex === false) {
             $partialIndex = strlen($formatVal);
             $val->append(LexoRank::NUMERAL_SYSTEM()->getRadixPointChar());
         }
 
         while ($partialIndex < 6) {
             $val->insert(0, $zero);
-            ++$partialIndex;
+            $partialIndex++;
         }
 
-        while ($val[$val->getLength() - 1] === $zero) {
+        $valStr = (string)$val;
+        while ($valStr[$val->getLength() - 1] === $zero) {
             $val->setLength($val->getLength() - 1);
         }
 
-        return $val->__toString();
+        return (string)$val;
     }
 
     private string $value;
