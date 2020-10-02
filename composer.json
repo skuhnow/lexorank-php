@@ -1,0 +1,23 @@
+{
+    "name": "sebastian/lexorank-php",
+    "description": "An implemention of Jiras Lexorank in PHP",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Sebastian Klocke",
+            "email": "info@sebastiankuhnow.de"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "SKlocke\\LexoRank\\": "src/",
+            "SKlocke\\LexoRank\\Tests\\": "tests/"
+        }
+    },
+    "require": {
+        "php": "^7.4"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.3"
+    }
+}
