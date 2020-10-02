@@ -1,10 +1,10 @@
 <?php
 
-namespace SKlocke\LexoRank\Tests;
+namespace SKuhnow\LexoRank\Tests;
 
 use PHPUnit\Framework\TestCase;
-use SKlocke\LexoRank\LexoDecimal;
-use SKlocke\LexoRank\NumeralSystems\LexoNumeralSystem36;
+use SKuhnow\LexoRank\LexoDecimal;
+use SKuhnow\LexoRank\NumeralSystems\LexoNumeralSystem36;
 
 class LexoDecimalTest extends TestCase
 {

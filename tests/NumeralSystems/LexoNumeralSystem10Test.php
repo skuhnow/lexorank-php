@@ -1,10 +1,10 @@
 <?php
 
-namespace SKlocke\LexoRank\Tests\NumeralSystems;
+namespace SKuhnow\LexoRank\Tests\NumeralSystems;
 
 use Exception;
 use PHPUnit\Framework\TestCase;
-use SKlocke\LexoRank\NumeralSystems\LexoNumeralSystem10;
+use SKuhnow\LexoRank\NumeralSystems\LexoNumeralSystem10;
 
 class LexoNumeralSystem10Test extends TestCase
 {

@@ -1,11 +1,11 @@
 <?php
 
-namespace SKlocke\LexoRank;
+namespace SKuhnow\LexoRank;
 
 
 use Exception;
-use SKlocke\LexoRank\NumeralSystems\LexoNumeralSystem36;
-use SKlocke\LexoRank\Utils\StringBuilder;
+use SKuhnow\LexoRank\NumeralSystems\LexoNumeralSystem36;
+use SKuhnow\LexoRank\Utils\StringBuilder;
 
 class LexoRank
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace SKlocke\LexoRank\Tests;
+namespace SKuhnow\LexoRank\Tests;
 
 use PHPUnit\Framework\TestCase;
-use SKlocke\LexoRank\LexoRank;
+use SKuhnow\LexoRank\LexoRank;
 
 class LexoRankTest extends TestCase
 {

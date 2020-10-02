@@ -1,10 +1,10 @@
 <?php
 
-namespace SKlocke\LexoRank\Tests;
+namespace SKuhnow\LexoRank\Tests;
 
 use PHPUnit\Framework\TestCase;
-use SKlocke\LexoRank\LexoInteger;
-use SKlocke\LexoRank\NumeralSystems\LexoNumeralSystem10;
+use SKuhnow\LexoRank\LexoInteger;
+use SKuhnow\LexoRank\NumeralSystems\LexoNumeralSystem10;
 
 class LexoIntegerTest extends TestCase
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace SKlocke\LexoRank;
+namespace SKuhnow\LexoRank;
 
 use Exception;
-use SKlocke\LexoRank\NumeralSystems\ILexoNumeralSystem;
-use SKlocke\LexoRank\Utils\StringBuilder;
+use SKuhnow\LexoRank\NumeralSystems\ILexoNumeralSystem;
+use SKuhnow\LexoRank\Utils\StringBuilder;
 
 class LexoDecimal
 {

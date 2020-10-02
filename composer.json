@@ -1,5 +1,5 @@
 {
-    "name": "sebastian/lexorank-php",
+    "name": "skuhnow/lexorank-php",
     "description": "An implemention of Jiras Lexorank in PHP",
     "type": "library",
     "authors": [
@@ -10,8 +10,8 @@
     ],
     "autoload": {
         "psr-4": {
-            "SKlocke\\LexoRank\\": "src/",
-            "SKlocke\\LexoRank\\Tests\\": "tests/"
+            "SKuhnow\\LexoRank\\": "src/",
+            "SKuhnow\\LexoRank\\Tests\\": "tests/"
         }
     },
     "require": {

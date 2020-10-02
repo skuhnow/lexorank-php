@@ -1,6 +1,6 @@
 <?php
 
-namespace SKlocke\LexoRank\NumeralSystems;
+namespace SKuhnow\LexoRank\NumeralSystems;
 
 use Exception;
 

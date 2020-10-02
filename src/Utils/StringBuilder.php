@@ -1,6 +1,6 @@
 <?php
 
-namespace SKlocke\LexoRank\Utils;
+namespace SKuhnow\LexoRank\Utils;
 
 class StringBuilder
 {
