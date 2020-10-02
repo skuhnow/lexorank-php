@@ -2,12 +2,12 @@
 
 namespace SKuhnow\LexoRank\NumeralSystems;
 
-use Exception;
+use SKuhnow\LexoRank\Exception\LexoRankException;
 
 class LexoNumeralSystem64 implements ILexoNumeralSystem
 {
 
-    private array $digits;
+    private $digits;
 
     public function __construct()
     {
@@ -34,29 +34,29 @@ class LexoNumeralSystem64 implements ILexoNumeralSystem
         return ':';
     }
 
-    public function toDigit(string $ch): int
+    public function toDigit(string $char): int
     {
-        if ($ch >= '0' && $ch <= '9') {
-            return ord($ch) - 48;
+        if ($char >= '0' && $char <= '9') {
+            return ord($char) - 48;
         }
 
-        if ($ch >= 'A' && $ch <= 'Z') {
-            return ord($ch) - 65 + 10;
+        if ($char >= 'A' && $char <= 'Z') {
+            return ord($char) - 65 + 10;
         }
 
-        if ($ch === '^') {
+        if ($char === '^') {
             return 36;
         }
 
-        if ($ch === '_') {
+        if ($char === '_') {
             return 37;
         }
 
-        if ($ch >= 'a' && $ch <= 'z') {
-            return ord($ch) - 97 + 38;
+        if ($char >= 'a' && $char <= 'z') {
+            return ord($char) - 97 + 38;
         }
 
-        throw new Exception('Not valid digit: ' . $ch);
+        throw new LexoRankException('Not valid digit: ' . $char);
     }
 
     public function toChar(int $digit): string

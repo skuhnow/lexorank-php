@@ -2,8 +2,7 @@
 
 namespace SKuhnow\LexoRank;
 
-
-use Exception;
+use SKuhnow\LexoRank\Exception\LexoRankException;
 use SKuhnow\LexoRank\NumeralSystems\LexoNumeralSystem36;
 use SKuhnow\LexoRank\Utils\StringBuilder;
 
@@ -20,7 +19,7 @@ class LexoRank
     private static $_INITIAL_MIN_DECIMAL;
     private static $_INITIAL_MAX_DECIMAL;
 
-    public static function NUMERAL_SYSTEM()
+    public static function NUMERAL_SYSTEM(): LexoNumeralSystem36
     {
         if (!self::$_NUMERAL_SYSTEM) {
             self::$_NUMERAL_SYSTEM = new LexoNumeralSystem36();
@@ -98,7 +97,7 @@ class LexoRank
         if (!self::$_INITIAL_MAX_DECIMAL) {
             self::$_INITIAL_MAX_DECIMAL = LexoDecimal::parse(
                 LexoRank::NUMERAL_SYSTEM()->toChar(LexoRank::NUMERAL_SYSTEM()->getBase() - 2) . '00000',
-                LexoRank::NUMERAL_SYSTEM(),
+                LexoRank::NUMERAL_SYSTEM()
             );
         }
 
@@ -134,14 +133,14 @@ class LexoRank
     public static function betweenStatic(LexoDecimal $oLeft, LexoDecimal $oRight): LexoDecimal
     {
         if ($oLeft->getSystem()->getBase() !== $oRight->getSystem()->getBase()) {
-            throw new Exception('Expected same system');
+            throw new LexoRankException('Expected same system');
         }
 
         $left = $oLeft;
         $right = $oRight;
 
         if ($oLeft->getScale() < $oRight->getScale()) {
-            $nLeft = $oRight->setScale($oLeft->getScale(), false);
+            $nLeft = $oRight->setScale($oLeft->getScale());
             if ($oLeft->compareTo($nLeft) >= 0) {
                 return LexoRank::mid($oLeft, $oRight);
             }
@@ -158,13 +157,10 @@ class LexoRank
             $left = $nLeft;
         }
 
-
-        // TODO ???
-        $nRight = null;
         for ($scale = $left->getScale(); $scale > 0; $right = $nRight) {
             $nScale1 = $scale - 1;
             $nLeft1 = $left->setScale($nScale1, true);
-            $nRight = $right->setScale($nScale1, false);
+            $nRight = $right->setScale($nScale1);
             $cmp = $nLeft1->compareTo($nRight);
             if ($cmp === 0) {
                 return LexoRank::checkMid($oLeft, $oRight, $nLeft1);
@@ -179,8 +175,6 @@ class LexoRank
 
         $mid = LexoRank::middleInternal($oLeft, $oRight, $left, $right);
 
-        // TODO ???
-        $nScale = 0;
         for ($mScale = $mid->getScale(); $mScale > 0; $mScale = $nScale) {
             $nScale = $mScale - 1;
             $nMid = $mid->setScale($nScale);
@@ -206,7 +200,7 @@ class LexoRank
     public static function from(LexoRankBucket $bucket, LexoDecimal $decimal): LexoRank
     {
         if ($decimal->getSystem()->getBase() !== LexoRank::NUMERAL_SYSTEM()->getBase()) {
-            throw new Exception('Expected different system');
+            throw new LexoRankException('Expected different system');
         }
 
         return new LexoRank($bucket, $decimal);
@@ -238,7 +232,7 @@ class LexoRank
         $mid = $sum->multiply(LexoDecimal::half($left->getSystem()));
         $scale = $left->getScale() > $right->getScale() ? $left->getScale() : $right->getScale();
         if ($mid->getScale() > $scale) {
-            $roundDown = $mid->setScale($scale, false);
+            $roundDown = $mid->setScale($scale);
             if ($roundDown->compareTo($left) > 0) {
                 return $roundDown;
             }
@@ -274,9 +268,9 @@ class LexoRank
         return (string)$val;
     }
 
-    private string $value;
-    private LexoRankBucket $bucket;
-    private LexoDecimal $decimal;
+    private $value;
+    private $bucket;
+    private $decimal;
 
     public function __construct(LexoRankBucket $bucket, LexoDecimal $decimal)
     {
@@ -319,7 +313,7 @@ class LexoRank
     public function between(LexoRank $other): LexoRank
     {
         if (!$this->bucket->equals($other->bucket)) {
-            throw new Exception('Between works only within the same bucket');
+            throw new LexoRankException('Between works only within the same bucket');
         }
 
         $cmp = $this->decimal->compareTo($other->decimal);
@@ -328,7 +322,7 @@ class LexoRank
         }
 
         if ($cmp === 0) {
-            throw new Exception(
+            throw new LexoRankException(
                 'Try to rank between issues with same rank this=' .
                 $this .
                 ' other=' .
@@ -336,7 +330,7 @@ class LexoRank
                 ' this.decimal=' .
                 $this->decimal .
                 ' other.decimal=' .
-                $other->decimal,
+                $other->decimal
             );
         }
 

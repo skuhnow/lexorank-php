@@ -2,6 +2,7 @@
 
 namespace SKuhnow\LexoRank\Tests;
 
+use Exception;
 use PHPUnit\Framework\TestCase;
 use SKuhnow\LexoRank\LexoRank;
 
@@ -57,7 +58,7 @@ class LexoRankTest extends TestCase
      * @param $nextStep
      * @param $expected
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function testMoveTo($prevStep, $nextStep, $expected)
     {
@@ -77,7 +78,7 @@ class LexoRankTest extends TestCase
         $this->assertSame($expected, (string)$between);
     }
 
-    public function dataProviderMoveTo()
+    public function dataProviderMoveTo(): array
     {
         return [
             ['0', '1', '0|0i0000:'],

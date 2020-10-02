@@ -2,7 +2,7 @@
 
 namespace SKuhnow\LexoRank;
 
-use Exception;
+use SKuhnow\LexoRank\Exception\LexoRankException;
 
 class LexoRankBucket
 {
@@ -69,7 +69,7 @@ class LexoRankBucket
             }
         }
 
-        throw new Exception('Unknown bucket: ' . $bucketIndex);
+        throw new LexoRankException('Unknown bucket: ' . $bucketIndex);
     }
 
     public static function resolve(int $bucketId): LexoRankBucket
@@ -83,11 +83,11 @@ class LexoRankBucket
             }
         }
 
-        throw new Exception('No bucket found with id ' . $bucketId);
+        throw new LexoRankException('No bucket found with id ' . $bucketId);
     }
 
 
-    private LexoInteger $value;
+    private $value;
 
     private function __construct(string $val)
     {

@@ -2,7 +2,7 @@
 
 namespace SKuhnow\LexoRank\NumeralSystems;
 
-use Exception;
+use SKuhnow\LexoRank\Exception\LexoRankException;
 
 class LexoNumeralSystem10 implements ILexoNumeralSystem
 {
@@ -27,13 +27,13 @@ class LexoNumeralSystem10 implements ILexoNumeralSystem
         return '.';
     }
 
-    public function toDigit(string $var1): int
+    public function toDigit(string $char): int
     {
-        if ($var1 >= '0' && $var1 <= '9') {
-            return ord($var1) - 48;
+        if ($char >= '0' && $char <= '9') {
+            return ord($char) - 48;
         }
 
-        throw new Exception(sprintf("Not valid digit: %s", $var1));
+        throw new LexoRankException(sprintf("Not valid digit: %s", $char));
     }
 
     public function toChar(int $digit): string

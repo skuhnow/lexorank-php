@@ -2,7 +2,7 @@
 
 namespace SKuhnow\LexoRank;
 
-use Exception;
+use SKuhnow\LexoRank\Exception\LexoRankException;
 use SKuhnow\LexoRank\NumeralSystems\ILexoNumeralSystem;
 use SKuhnow\LexoRank\Utils\StringBuilder;
 
@@ -134,7 +134,7 @@ class LexoInteger
     private static function complementInternal(ILexoNumeralSystem $sys, array $mag, int $digits): array
     {
         if ($digits <= 0) {
-            throw new Exception('Expected at least 1 digit');
+            throw new LexoRankException('Expected at least 1 digit');
         }
 
         $nmag = array_fill(0, $digits, $sys->getBase() - 1);
@@ -168,9 +168,9 @@ class LexoInteger
         return 0;
     }
 
-    private ILexoNumeralSystem $sys;
-    private int $sign;
-    private array $mag;
+    private $sys;
+    private $sign;
+    private $mag;
 
     public function __construct(ILexoNumeralSystem $system, int $sign, array $mag)
     {
@@ -416,7 +416,7 @@ class LexoInteger
     private function checkSystem(LexoInteger $other)
     {
         if ($this->sys->getBase() !== $other->sys->getBase()) {
-            throw new Exception('Expected numbers of same numeral sys');
+            throw new LexoRankException('Expected numbers of same numeral sys');
         }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace SKuhnow\LexoRank;
 
-use Exception;
+use SKuhnow\LexoRank\Exception\LexoRankException;
 use SKuhnow\LexoRank\NumeralSystems\ILexoNumeralSystem;
 use SKuhnow\LexoRank\Utils\StringBuilder;
 
@@ -21,7 +21,7 @@ class LexoDecimal
     ): LexoDecimal {
         $partialIndex = strpos($str, $system->getRadixPointChar());
         if (strrpos($str, $system->getRadixPointChar()) !== $partialIndex) {
-            throw new Exception('More than one ' . $system->getRadixPointChar());
+            throw new LexoRankException('More than one ' . $system->getRadixPointChar());
         }
 
         if ($partialIndex === false) {
@@ -54,8 +54,8 @@ class LexoDecimal
         return new LexoDecimal($newInteger, $newSig);
     }
 
-    private LexoInteger $mag;
-    private int $sig;
+    private $mag;
+    private $sig;
 
     private function __construct(LexoInteger $mag, int $sig)
     {

@@ -12,7 +12,7 @@ interface ILexoNumeralSystem {
 
     public function getRadixPointChar(): string;
 
-    public function toDigit(string $var1): int;
+    public function toDigit(string $char): int;
 
-    public function toChar(int $var1): string;
+    public function toChar(int $digit): string;
 }

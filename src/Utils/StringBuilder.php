@@ -5,19 +5,19 @@ namespace SKuhnow\LexoRank\Utils;
 class StringBuilder
 {
 
-    private string $str;
+    private $str;
 
     public function __construct(string $str = '')
     {
         $this->str = $str;
     }
 
-    public function getLength()
+    public function getLength(): int
     {
         return strlen($this->str);
     }
 
-    public function setLength(int $value)
+    public function setLength(int $value): void
     {
         $this->str = substr($this->str, 0, $value);
     }
@@ -40,7 +40,7 @@ class StringBuilder
         return $this;
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return $this->str;
     }

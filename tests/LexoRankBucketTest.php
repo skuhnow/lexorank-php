@@ -2,6 +2,7 @@
 
 namespace SKuhnow\LexoRank\Tests;
 
+use Exception;
 use PHPUnit\Framework\TestCase;
 use SKuhnow\LexoRank\LexoRankBucket;
 
@@ -67,7 +68,7 @@ class LexoRankBucketTest extends TestCase
 
     public function testFromInvalidIndex()
     {
-        $this->expectException(\Exception::class);
+        $this->expectException(Exception::class);
         $this->expectExceptionMessage('Unknown bucket: 3');
         LexoRankBucket::from('3');
     }
