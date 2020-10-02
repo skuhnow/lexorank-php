@@ -193,7 +193,8 @@ class LexoDecimal
         }
 
         $sb = new StringBuilder($intStr);
-        $head = $sb[0];
+        $sbStr = (string)$sb;
+        $head = $sbStr[0];
         $specialHead =
             $head === $this->mag->getSystem()->getPositiveChar() || $head === $this->mag->getSystem()->getNegativeChar();
 

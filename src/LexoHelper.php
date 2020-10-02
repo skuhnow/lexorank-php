@@ -5,7 +5,7 @@ namespace SKlocke\LexoRank;
 class LexoHelper
 {
 
-    public static function arrayCopy($sourceArray, $sourceIndex, $destinationArray, $destinationIndex, $length)
+    public static function arrayCopy($sourceArray, $sourceIndex, &$destinationArray, $destinationIndex, $length)
     {
         $destination = $destinationIndex;
         $finalLength = $sourceIndex + $length;

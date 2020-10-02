@@ -45,7 +45,7 @@ class LexoInteger
 
     public static function make(ILexoNumeralSystem $sys, int $sign, array $mag): LexoInteger
     {
-        for ($actualLength = count($mag); $actualLength > 0 && $mag[$actualLength - 1] === 0; --$actualLength) {
+        for ($actualLength = count($mag); $actualLength > 0 && $mag[$actualLength - 1] === 0; $actualLength--) {
             // ignore
         }
 
@@ -156,7 +156,7 @@ class LexoInteger
             return 1;
         }
 
-        for ($i = count($l) - 1; $i >= 0; --$i) {
+        for ($i = count($l) - 1; $i >= 0; $i--) {
             if ($l[$i] < $r[$i]) {
                 return -1;
             }

@@ -406,6 +406,6 @@ class LexoRank
             return 1;
         }
 
-        return ($this->value === $other->value) ? 0 : -1;
+        return strcmp($this->value, $other->value);
     }
 }

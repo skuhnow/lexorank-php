@@ -57,27 +57,27 @@ class LexoRankBucket
         return LexoRankBucket::VALUES()[count(LexoRankBucket::VALUES()) - 1];
     }
 
-    public static function from(string $str): LexoRankBucket
+    public static function from(string $bucketIndex): LexoRankBucket
     {
-        $val = LexoInteger::parse($str, LexoRank::NUMERAL_SYSTEM());
-        $var2 = LexoRankBucket::VALUES();
-        $var3 = count($var2);
-        for ($var4 = 0; $var4 < $var3; $var4++) {
-            $bucket = $var2[$var4];
-            if ($bucket->value->equals($val)) {
+        $bucketIndexInteger = LexoInteger::parse($bucketIndex, LexoRank::NUMERAL_SYSTEM());
+        $bucketValues = LexoRankBucket::VALUES();
+        $bucketValuesCount = count($bucketValues);
+        for ($i = 0; $i < $bucketValuesCount; $i++) {
+            $bucket = $bucketValues[$i];
+            if ($bucket->value->equals($bucketIndexInteger)) {
                 return $bucket;
             }
         }
 
-        throw new Exception('Unknown bucket: ' . $str);
+        throw new Exception('Unknown bucket: ' . $bucketIndex);
     }
 
     public static function resolve(int $bucketId): LexoRankBucket
     {
-        $var1 = LexoRankBucket::VALUES();
-        $var2 = count($var1);
-        for ($var3 = 0; $var3 < $var2; $var3++) {
-            $bucket = $var1[$var3];
+        $bucketValues = LexoRankBucket::VALUES();
+        $bucketValuesCount = count($bucketValues);
+        for ($i = 0; $i < $bucketValuesCount; $i++) {
+            $bucket = $bucketValues[$i];
             if ($bucket->equals(LexoRankBucket::from($bucketId))) {
                 return $bucket;
             }
