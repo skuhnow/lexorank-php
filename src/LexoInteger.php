@@ -288,7 +288,7 @@ class LexoInteger
 
         $nmag = array_fill(0, count($this->mag) + $times, 0);
 
-        LexoHelper::arrayCopy($this->mag, 0, $nmag, $times, array($this->mag));
+        LexoHelper::arrayCopy($this->mag, 0, $nmag, $times, count($this->mag));
 
         return LexoInteger::make($this->sys, $this->sign, $nmag);
     }
