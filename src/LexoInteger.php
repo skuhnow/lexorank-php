@@ -115,11 +115,11 @@ class LexoInteger
     private static function multiplyInternal(ILexoNumeralSystem $sys, array $l, array $r): array
     {
         $result = array_fill(0, count($l) + count($r), 0);
-        for ($li = 0; $li < count($l); $li++) {
-            for ($ri = 0; $ri < count($r); $ri++) {
+        foreach ($l as $li => $liValue) {
+            foreach ($r as $ri => $riValue) {
                 $resultIndex = $li + $ri;
                 for (
-                  $result[$resultIndex] += $l[$li] * $r[$ri];
+                  $result[$resultIndex] += $liValue * $riValue;
                   $result[$resultIndex] >= $sys->getBase();
                   $result[$resultIndex] -= $sys->getBase()
                 ) {
@@ -139,7 +139,7 @@ class LexoInteger
 
         $nmag = array_fill(0, $digits, $sys->getBase() - 1);
 
-        for ($i = 0; $i < count($mag); $i++) {
+        for ($i = 0, $iMax = count($mag); $i < $iMax; $i++) {
             $nmag[$i] = $sys->getBase() - 1 - $mag[$i];
         }
 
@@ -194,9 +194,7 @@ class LexoInteger
 
             if ($this->sign === -1) {
                 $pos = $this->negate();
-                $val = $pos->subtract($other);
-
-                return $val->negate();
+                return $pos->subtract($other)->negate();
             }
 
             $pos = $other->negate();
@@ -224,9 +222,7 @@ class LexoInteger
 
             if ($this->sign === -1) {
                 $negate = $this->negate();
-                $sum = $negate->add($other);
-
-                return $sum->negate();
+                return $negate->add($other)->negate();
             }
 
             $negate = $other->negate();
@@ -328,7 +324,7 @@ class LexoInteger
 
     public function getMag(int $index): int
     {
-        return $this->mag[$index];
+        return $this->mag[$index] ?? $this->mag[$index-1];
     }
 
     public function compareTo(LexoInteger $other): int
@@ -376,10 +372,9 @@ class LexoInteger
 
         $sb = new StringBuilder();
         $var2 = $this->mag;
-        $var3 = count($var2);
 
-        for ($var4 = 0; $var4 < $var3; $var4++) {
-            $digit = $var2[$var4];
+        foreach ($var2 as $var4Value) {
+            $digit = $var4Value;
             $sb->insert(0, $this->sys->toChar($digit));
         }
 
