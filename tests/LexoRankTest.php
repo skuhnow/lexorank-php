@@ -103,4 +103,14 @@ class LexoRankTest extends TestCase
         $this->assertLessThan(0, $rankA->compareTo($rankMax));
         $this->assertGreaterThan(0, $rankMax->compareTo($rankA));
     }
+
+    public function testDeepDecimal()
+    {
+        $min = LexoRank::min();
+        $rank = $min->genNext();
+        for($i = 0; $i < 100; $i++) {
+            $rank = $rank->between($min);
+        }
+        $this->assertSame('0|000000:000000000000001', (string)$rank);
+    }
 }
